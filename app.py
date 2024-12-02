@@ -41,7 +41,7 @@ def encrypt_file(file_path, key_path, output_file_path, vigenere_key, caesar_shi
     base64_ciphertext = base64.b64encode(ciphertext).decode('utf-8')
     caesar_ciphertext = caesar_encrypt(base64_ciphertext, caesar_shift)
 
-    # Apply Vigenère cipher to further secure the data
+    # Apply Vigenère cipher
     vigenere_ciphertext = vigenere_encrypt(caesar_ciphertext, vigenere_key)
 
     with open(output_file_path, 'wb') as encrypted_file:
@@ -113,7 +113,6 @@ def vigenere_decrypt(ciphertext, keyword):
 @app.route('/')
 def index():
     return render_template('index.html')
-
 @app.route('/process', methods=['POST'])
 def process():
     operation = request.form['action']
@@ -122,7 +121,6 @@ def process():
     file_path = os.path.join('uploads', filename)
     file.save(file_path)
 
-    # Get Vigenère key and Caesar shift from form input
     vigenere_key = request.form['vigenere_key']
     caesar_shift = int(request.form['caesar_shift'])
 
@@ -130,12 +128,13 @@ def process():
         output_filename = 'encrypted_file' + os.path.splitext(file.filename)[-1]
         output_file_path = os.path.join('uploads', output_filename)
         encrypt_file(file_path, 'keys/public_key.pem', output_file_path, vigenere_key, caesar_shift)
+        file_type = 'encrypted'
     elif operation == 'decrypt':
         output_filename = 'decrypted_file' + os.path.splitext(file.filename)[-1]
         output_file_path = os.path.join('uploads', output_filename)
         decrypt_file(file_path, 'keys/private_key.pem', output_file_path, vigenere_key, caesar_shift)
-
-    return render_template('download.html', operation=operation, filename=output_filename)
+        file_type = 'decrypted'
+    return render_template('download.html', operation=operation, filename=output_filename, file_type=file_type)
 
 @app.route('/download/<filename>')
 def download(filename):
