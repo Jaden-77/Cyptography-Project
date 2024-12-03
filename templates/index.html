@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cryptography Project</title>
+    <title>Ceniza Cryptography Project</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         function validateKeyInput(event) {
@@ -16,37 +16,48 @@
         }
     </script>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg">
-        <h1 class="text-2xl font-bold text-center mb-6">Ceniza Cryptography Project</h1>
-        
-        <form action="/process" method="POST" enctype="multipart/form-data" class="space-y-4">
-            <div>
-                <label class="block text-gray-700 font-semibold mb-2">Select File:</label>
-                <input type="file" name="file" required class="w-full p-2 border border-gray-300 rounded">
+<body class="flex items-center justify-center min-h-screen relative">
+    <div class="absolute w-full h-full object-cover" style="background: url('/static/back1.jpg') no-repeat center center/cover;"></div>
+    <div class="bg-white bg-opacity-95 shadow-lg rounded-lg p-8 w-full max-w-lg relative">
+        <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                <h1 class="text-2xl font-bold text-gray-800">Upload File</h1>
+            </div>
+        </div>
+        <form action="/process" method="POST" enctype="multipart/form-data" class="space-y-6">
+            <div class="border-dashed border-2 border-gray-300 rounded-lg p-6 text-center bg-opacity-100">
+                <div class="flex flex-col items-center justify-center space-y-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h10a4 4 0 004-4V7a4 4 0 00-4-4H7a4 4 0 00-4 4v8z" />
+                    </svg>
+                    <p class="text-gray-600">Choose a file or drag & drop it here</p>
+                    <p class="text-gray-400 text-sm">JPEG, PNG, PDF, and MP4 formats</p>
+                </div>
+                <input type="file" name="file" required class="w-full p-3 mt-4 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-green-500 bg-opacity-100">
             </div>
             
             <div>
-                <label class="block text-gray-700 font-semibold mb-2">Action:</label>
-                <select name="action" class="w-full p-2 border border-gray-300 rounded">
+                <label class="block text-gray-800 font-semibold mb-2">Action:</label>
+                <select name="action" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-500">
                     <option value="encrypt">Encrypt</option>
                     <option value="decrypt">Decrypt</option>
                 </select>
             </div>
 
             <div>
-                <label class="block text-gray-700 font-semibold mb-2">Vigenere Key:</label>
-                <input type="text" name="vigenere_key" required class="w-full p-2 border border-gray-300 rounded" 
+                <label class="block text-gray-800 font-semibold mb-2">Vigenere Key:</label>
+                <input type="text" name="vigenere_key" required class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-500" 
                        oninput="validateKeyInput(event)" placeholder="Enter letters only">
             </div>
 
             <div>
-                <label class="block text-gray-700 font-semibold mb-2">Caesar Shift Value:</label>
-                <input type="number" name="caesar_shift" required class="w-full p-2 border border-gray-300 rounded" 
+                <label class="block text-gray-800 font-semibold mb-2">Caesar Shift Value:</label>
+                <input type="number" name="caesar_shift" required class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-500" 
                        min="1" max="25" placeholder="Enter a number between 1 and 25">
             </div>
             
-            <button type="submit" class="w-full bg-green-700 hover:bg-green-600 text-white py-2 rounded mt-4">
+            <button type="submit" class="w-full bg-green-600 hover:bg-green-500 text-white font-semibold py-3 rounded-lg transition-all ease-in-out duration-300 transform hover:scale-105">
                 Process File
             </button>
         </form>
